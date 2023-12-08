@@ -1,4 +1,7 @@
+import dotenv from 'dotenv';
 import {IConfigurations} from "./IConfigurations";
+
+dotenv.config();
 
 export const configs: IConfigurations = {
     apiUrl: process.env.API_URL || "",

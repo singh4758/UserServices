@@ -3,8 +3,6 @@ import mongoose from "mongoose";
 import Scheduler from "./utils/Scheduler";
 import Scripts from "./scripts";
 import {configs} from "./configurations/configs";
-import * as dotenv from 'dotenv';
-dotenv.config()
 
 
 class Server {
