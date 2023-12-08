@@ -1,3 +1,5 @@
+import * as https from "https";
+import {configs} from "../configurations/configs";
 import {IScript} from "./IScript";
 
 class Scripts implements IScript {
@@ -5,15 +7,12 @@ class Scripts implements IScript {
 
     public async start(): Promise<void> {
         try {
-            await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve([]);
-                }, 5000)
-            });
-            console.log('aaaaaaaaaaaaaaaa', new Date().toTimeString())
+            const url: string = `${configs.apiUrl}?page=${this.pageNo}&limit=${configs.batches}`;
+            const data = await https.get(url);
+            console.log(data);
             this.pageNo++;
         } catch (e) {
-            console.log("Error found")
+            console.log("Error found", e)
         }
     }
 }

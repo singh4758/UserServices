@@ -23,7 +23,7 @@ class Server {
 
     public bootstrap(): Server {
         this.intializeMongo();
-        new Scheduler(configs.batches, new Scripts()).start();
+        new Scheduler(configs.schedulerInterval, new Scripts()).start();
         return this;
     }
 

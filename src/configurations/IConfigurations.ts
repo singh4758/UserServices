@@ -3,4 +3,5 @@ export interface IConfigurations {
     mongoUrl: string,
     apiUrl: string,
     batches: number,
+    schedulerInterval: number,
 }

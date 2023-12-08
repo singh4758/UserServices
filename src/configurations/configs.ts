@@ -5,7 +5,8 @@ dotenv.config();
 
 export const configs: IConfigurations = {
     apiUrl: process.env.API_URL || "",
-    batches: parseInt(process.env.BATCHES || "500"),
+    batches: parseInt(process.env.BATCHES || "5"),
     mongoUrl: process.env.MONGO_URL || "",
+    schedulerInterval: parseInt(process.env.SCHEDULER_INTERVAL || "10000"),
     port: parseInt(process.env.PORT || "3000")
 }
