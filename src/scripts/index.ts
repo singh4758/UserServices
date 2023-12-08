@@ -8,7 +8,7 @@ class Scripts implements IScript {
 
     public async start(): Promise<boolean> {
         try {
-            const url: string = `${configs.apiUrl}?page=${this.pageNo}&limit=${configs.batches}`;
+            const url: string = `${configs.apiUrl}&page=${this.pageNo}&limit=${configs.batches}`;
             const { data: { results } } = await axios.get(url);
             if(results.length === 0) {
                 return false;
