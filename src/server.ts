@@ -1,3 +1,4 @@
+import * as bodyParser from 'body-parser';
 import express, {Express} from 'express';
 import mongoose from "mongoose";
 import Scheduler from "./utils/Scheduler";
@@ -11,6 +12,11 @@ class Server {
 
     constructor() {
         this.app = express();
+    }
+
+    private initJsonParser() {
+        this.app.use(bodyParser.json());
+        this.app.use(bodyParser.urlencoded({ extended: false }));
     }
 
     private intializeMongo(): void {
@@ -33,6 +39,7 @@ class Server {
     public bootstrap(): Server {
         this.intializeMongo();
         this.initializeRouter();
+        this.initJsonParser();
         this.intializeScript();
         return this;
     }
