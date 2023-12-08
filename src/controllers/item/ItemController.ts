@@ -21,7 +21,7 @@ export class ItemController {
                 sort,
             );
             const itemCount = await ItemService.itemsCount({name, age, email});
-            return res.send({ items, limit, page, total: itemCount });
+            return res.send({ items, limit, page, total: itemCount, sortBy: sort });
         } catch (e) {
             console.error("Error", e);
             res.status(500).send({message: "Internal server error"});
