@@ -4,6 +4,7 @@ import {IScript} from "../scripts/IScript";
 class Scheduler {
     private readonly scheduleInterval: number;
     private readonly script: IScript;
+    private moreData: boolean = true;
 
     constructor(scheduleInterval: number, script: IScript) {
         this.scheduleInterval = scheduleInterval;
@@ -15,8 +16,8 @@ class Scheduler {
     }
 
     public async start(): Promise<void> {
-        while(true) {
-            await this.script.start();
+        while(this.moreData) {
+            this.moreData = await this.script.start();
             await this.sleep(this.scheduleInterval);
         }
     }

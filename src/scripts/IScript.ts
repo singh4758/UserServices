@@ -1,4 +1,4 @@
 
 export interface IScript {
-    start(): Promise<void>;
+    start(): Promise<boolean>;
 }
