@@ -1,4 +1,4 @@
-import {IScript} from "../interfaces/IScript";
+import {IScript} from "../scripts/IScript";
 
 
 class Scheduler {

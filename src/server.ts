@@ -2,19 +2,20 @@ import express, {Express} from 'express';
 import mongoose from "mongoose";
 import Scheduler from "./utils/Scheduler";
 import Scripts from "./scripts";
+import {configs} from "./configurations/configs";
+import * as dotenv from 'dotenv';
+dotenv.config()
 
 
 class Server {
     private readonly app: Express;
-    private readonly port: number;
 
-    constructor(port: number) {
-        this.port = port;
+    constructor() {
         this.app = express();
     }
 
     private intializeMongo(): void {
-        mongoose.connect('mongodb://localhost:27017/test');
+        mongoose.connect(configs.mongoUrl);
         const db = mongoose.connection;
         db.on('error', console.error.bind(console, 'connection error:'));
         db.once('open', function() {
@@ -24,13 +25,13 @@ class Server {
 
     public bootstrap(): Server {
         this.intializeMongo();
-        new Scheduler(5000, new Scripts()).start();
+        new Scheduler(configs.batches, new Scripts()).start();
         return this;
     }
 
     public start(): void {
-        this.app.listen(this.port, (): void => {
-            console.log(`Server listening on port ${this.port}`);
+        this.app.listen(configs.port, (): void => {
+            console.log(`Server listening on port ${configs.port}`);
         });
     }
 }
