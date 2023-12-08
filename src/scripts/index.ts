@@ -1,4 +1,4 @@
-import {IScript} from "../interfaces/IScript";
+import {IScript} from "./IScript";
 
 class Scripts implements IScript {
     private pageNo: number = 0;
