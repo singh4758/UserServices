@@ -1,25 +1,25 @@
 import itemModel from "./item.model";
 import {IItem} from "../../interfaces/IItem";
 
-class ItemsService {
+class ItemService {
 
-    private static instance: ItemsService;
+    private static instance: ItemService;
 
-    public static getInstance(): ItemsService {
+    public static getInstance(): ItemService {
         if(!this.instance) {
-            this.instance = new ItemsService();
+            this.instance = new ItemService();
         }
         return this.instance;
     }
-    public async createUser(item: IItem): Promise<IItem> {
+    public async saveItem(item: IItem): Promise<IItem> {
         return itemModel.create(item);
     }
 
-    public async bulkInsertUser(items: IItem[]): Promise<IItem[]> {
+    public async saveItems(items: IItem[]): Promise<IItem[]> {
         return itemModel.insertMany(items);
     }
 
-    public async usersList(limit: number, page: number, filterOption: any): Promise<IItem[]> {
+    public async itemList(limit: number, page: number, filterOption?: any): Promise<IItem[]> {
         const {
             name,
             gender,
@@ -42,8 +42,8 @@ class ItemsService {
                 country
             },
         };
-        return itemModel.find(query).limit(limit).skip(limit * page);
+        return itemModel.find().limit(limit).skip(limit * (page - 1));
     }
 }
 
-export default ItemsService.getInstance();
+export default ItemService.getInstance();

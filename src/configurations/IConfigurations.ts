@@ -4,4 +4,5 @@ export interface IConfigurations {
     apiUrl: string,
     batches: number,
     schedulerInterval: number,
+    apiPrefix: string,
 }

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import Scheduler from "./utils/Scheduler";
 import Scripts from "./scripts";
 import {configs} from "./configurations/configs";
+import router from "./routes";
 
 
 class Server {
@@ -21,9 +22,18 @@ class Server {
         });
     }
 
+    private initializeRouter(): void {
+        this.app.use(configs.apiPrefix, router);
+    }
+
+    private intializeScript(): void {
+        new Scheduler(configs.schedulerInterval, new Scripts()).start();
+    }
+
     public bootstrap(): Server {
         this.intializeMongo();
-        new Scheduler(configs.schedulerInterval, new Scripts()).start();
+        this.initializeRouter();
+        this.intializeScript();
         return this;
     }
 
