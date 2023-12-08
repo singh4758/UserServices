@@ -1,4 +1,4 @@
 import Server from './server';
 
-const server = new Server(3000);
-server.start();
+const server: Server = new Server(3000);
+server.bootstrap().start();
