@@ -19,56 +19,19 @@ class ItemService {
         return itemModel.insertMany(items);
     }
 
-    public async itemList(limit: number, page: number, filterOption?: any): Promise<IItem[]> {
-        const {
-            name,
-            gender,
-            email,
-            age,
-            state,
-            street,
-            city,
-            country
-        } = filterOption || {};
-        const query = {
-            name,
-            gender,
-            email,
-            age,
-            address: {
-                state,
-                street,
-                city,
-                country
-            },
-        };
-        return itemModel.find().limit(limit).skip(limit * (page - 1));
+    public async itemList(limit: number, page: number, filterOption: any, sort: string): Promise<IItem[]> {
+        const query = Object.keys(filterOption).reduce((previous, current) =>{
+            return ({...previous, ...(filterOption[current] ? {[current]: filterOption[current]}: {} ) });
+        }, {});
+        
+        return itemModel.find(query).sort({ [sort]: 1 }).limit(limit).skip(limit * (page - 1));
     }
 
     public async itemsCount(filterOption?: any): Promise<number> {
-        const {
-            name,
-            gender,
-            email,
-            age,
-            state,
-            street,
-            city,
-            country
-        } = filterOption || {};
-        const query = {
-            name,
-            gender,
-            email,
-            age,
-            address: {
-                state,
-                street,
-                city,
-                country
-            },
-        };
-        return itemModel.countDocuments({});
+        const query = Object.keys(filterOption).reduce((previous, current) =>{
+            return ({...previous, ...(filterOption[current] ? {[current]: filterOption[current]}: {} ) });
+        }, {});
+        return itemModel.countDocuments(query);
     }
 }
 
