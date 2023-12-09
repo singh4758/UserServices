@@ -39,7 +39,7 @@ const itemSchema = new Schema({
     },
     age: {
         required: true,
-        type: String,
+        type: Number,
     },
     picture: {
         required: true,

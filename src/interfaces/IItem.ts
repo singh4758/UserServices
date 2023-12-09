@@ -5,7 +5,7 @@ export interface IItem {
     name: string;
     address: IAddress;
     email: string;
-    age: string;
+    age: number;
     picture: string;
     createdAt: Date;
 }
