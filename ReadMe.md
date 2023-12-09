@@ -50,4 +50,7 @@
   ## If you want to sort. You can sort by key sort and passing you want to sort on them by default it is sort by name 
   *     http://localhost:9000/api/item/list?page:=2&limit:=10&sort=name
 
+# To run test cases
+  * npm run test:watch
+
 
